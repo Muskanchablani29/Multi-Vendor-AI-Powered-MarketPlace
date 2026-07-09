@@ -1,10 +1,17 @@
 .navbar-wrapper {
-  background: #ffffff;
-  padding: 8px 20px;
+  background: #d9dde3;
+  padding: 16px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 80px;
+  font-family: 'Inter', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  width: 100%;
 }
 
 .navbar {
@@ -24,12 +31,13 @@
   align-items: center;
   gap: 8px;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 17px;
   color: #111;
   white-space: nowrap;
   flex-shrink: 0;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   padding-right: 4px;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Search pill - centered, takes most space */
