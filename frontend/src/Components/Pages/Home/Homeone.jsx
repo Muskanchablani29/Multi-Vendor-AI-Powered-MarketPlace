@@ -1,21 +1,50 @@
+import { useState, useEffect } from "react";
 import { ArrowUpRight, Star, Heart, Sparkles } from "lucide-react";
 import "./Homeone.css";
 
+const steps = [
+  { num: "01", title: "AI-Powered Shopping",      desc: "Get personalized recommendations tailored just for you by our smart AI engine." },
+  { num: "02", title: "Multi-Vendor Marketplace", desc: "Browse thousands of products from hundreds of verified sellers in one place." },
+  { num: "03", title: "Secure Payments",          desc: "Pay safely with Razorpay — UPI, cards, wallets all supported." },
+  { num: "04", title: "Seller Analytics",         desc: "Sellers get real-time dashboards to track sales, revenue and growth." },
+  { num: "05", title: "Smart Wishlist",           desc: "Save your favourite items and get notified when prices drop." },
+  { num: "06", title: "Fast Delivery",            desc: "Reliable logistics partners ensure your orders arrive on time, every time." },
+];
+
 const products = [
-  { id: 1, name: "Wireless Earbuds Pro", price: "₹1,299", img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=120&h=120&fit=crop" },
-  { id: 2, name: "Smart Watch X2", price: "₹3,499", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120&h=120&fit=crop" },
-  { id: 3, name: "Laptop Sleeve", price: "₹599", img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=120&h=120&fit=crop" },
+  { id: 1, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=120&h=120&fit=crop" },
+  { id: 2, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=120&h=120&fit=crop" },
+  { id: 3, img: "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=120&h=120&fit=crop" },
 ];
 
 export default function Homeone() {
+  const [step, setStep]       = useState(0);
+  const [animDir, setAnimDir] = useState("up"); // "up" | "down"
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setVisible(false);
+      setAnimDir("up");
+      setTimeout(() => {
+        setStep(s => (s + 1) % steps.length);
+        setAnimDir("down");
+        setVisible(true);
+      }, 350);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  const current = steps[step];
+
   return (
     <div className="home-wrapper">
 
-      {/* ── Main Grid ── */}
+      {/* ── Top Grid ── */}
       <div className="home-grid">
 
         {/* ── Hero Card ── */}
-        <div className="card hero-card">
+        <div className="card hero-card anim-fade-up">
           <span className="hero-tag">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="9" height="9" rx="1.5"/><rect x="13" y="2" width="9" height="9" rx="1.5"/><rect x="2" y="13" width="9" height="9" rx="1.5"/><rect x="13" y="13" width="9" height="9" rx="1.5"/></svg>
             Multi-Vendor Marketplace
@@ -24,14 +53,28 @@ export default function Homeone() {
           <div className="hero-content">
             <div className="hero-text">
               <h1>Shop Smarter,<br /><em className="hero-accent">Sell Better.</em></h1>
+
+              {/* Step Slider */}
               <div className="hero-feature">
-                <span className="hero-num">01</span>
+                <span className="hero-num">{current.num}</span>
                 <span className="hero-line" />
-                <div>
-                  <p className="hero-feature-title">AI-Powered Shopping</p>
-                  <p className="hero-feature-desc">Get personalized recommendations tailored just for you by our smart AI engine.</p>
+                <div className={`step-content ${visible ? "step-in" : "step-out"} step-${animDir}`}>
+                  <p className="hero-feature-title">{current.title}</p>
+                  <p className="hero-feature-desc">{current.desc}</p>
                 </div>
               </div>
+
+              {/* Step dots */}
+              <div className="step-dots">
+                {steps.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`step-dot ${i === step ? "active" : ""}`}
+                    onClick={() => { setVisible(false); setTimeout(() => { setStep(i); setVisible(true); }, 300); }}
+                  />
+                ))}
+              </div>
+
               <button className="hero-btn">
                 View All Products
                 <span className="hero-btn-icon"><ArrowUpRight size={16} /></span>
@@ -39,17 +82,65 @@ export default function Homeone() {
             </div>
 
             <div className="hero-image-wrap">
+
+              {/* floating orbit dots */}
               <div className="hero-dot dot1" />
               <div className="hero-dot dot2" />
               <div className="hero-dot dot3" />
-              <img
-                src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=420&h=420&fit=crop"
-                alt="Featured Product"
-                className="hero-img"
-              />
-              <div className="hero-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8l4 4-4 4"/></svg>
+
+              {/* ── Shopping Bag Scene ── */}
+              <div className="bag-scene-hero">
+
+                {/* product cards flying in */}
+                <div className="hfly hfly-1">
+                  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=56&h=56&fit=crop" alt="watch" />
+                  <span>Watch</span>
+                </div>
+                <div className="hfly hfly-2">
+                  <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=56&h=56&fit=crop" alt="shoe" />
+                  <span>Sneaker</span>
+                </div>
+                <div className="hfly hfly-3">
+                  <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=56&h=56&fit=crop" alt="perfume" />
+                  <span>Perfume</span>
+                </div>
+                <div className="hfly hfly-4">
+                  <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=56&h=56&fit=crop" alt="laptop" />
+                  <span>Laptop</span>
+                </div>
+
+                {/* main bag */}
+                <div className="hero-bag">
+                  <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* shadow */}
+                    <ellipse cx="60" cy="134" rx="36" ry="6" fill="rgba(0,0,0,0.12)"/>
+                    {/* bag body */}
+                    <rect x="10" y="44" width="100" height="86" rx="18" fill="#1a1a1a"/>
+                    {/* bag shine */}
+                    <rect x="22" y="58" width="30" height="6" rx="3" fill="#ffffff18"/>
+                    {/* handle left */}
+                    <path d="M38 44 C38 20 52 14 60 14" stroke="#1a1a1a" strokeWidth="8" strokeLinecap="round" fill="none"/>
+                    {/* handle right */}
+                    <path d="M82 44 C82 20 68 14 60 14" stroke="#1a1a1a" strokeWidth="8" strokeLinecap="round" fill="none"/>
+                    {/* NM label */}
+                    <rect x="30" y="76" width="60" height="32" rx="8" fill="#c8f135"/>
+                    <text x="60" y="98" textAnchor="middle" fill="#111" fontSize="16" fontWeight="900" fontFamily="Inter,sans-serif">NovaMart</text>
+                    {/* bag opening highlight */}
+                    <rect x="10" y="44" width="100" height="14" rx="10" fill="#2e2e2e"/>
+                  </svg>
+                </div>
+
+                {/* sparkles after drop */}
+                <div className="hsp hsp-1">✦</div>
+                <div className="hsp hsp-2">✦</div>
+                <div className="hsp hsp-3">✦</div>
+                <div className="hsp hsp-4">✦</div>
+                <div className="hsp hsp-5">✦</div>
+
+                {/* count badge */}
+                <div className="bag-count">4 items added!</div>
               </div>
+
             </div>
           </div>
 
@@ -70,38 +161,27 @@ export default function Homeone() {
         {/* ── Right Column ── */}
         <div className="right-col">
 
-          {/* Popular Categories */}
-          <div className="card categories-card">
+          <div className="card categories-card anim-fade-up" style={{ animationDelay: "0.1s" }}>
             <p className="card-label">Popular Categories</p>
             <div className="category-dots">
               {["#4f8ef7","#f97316","#22c55e","#ef4444","#06b6d4"].map((c, i) => (
-                <span key={i} className="cat-dot" style={{ background: c }} />
+                <span key={i} className="cat-dot" style={{ background: c, animationDelay: `${0.15 + i * 0.08}s` }} />
               ))}
             </div>
           </div>
 
-          {/* Featured Seller */}
-          <div className="card featured-seller-card">
+          <div className="card featured-seller-card anim-fade-up" style={{ animationDelay: "0.2s" }}>
             <div className="fs-text">
               <p className="card-label">Top Seller</p>
               <p className="fs-name">TechZone Store</p>
             </div>
-            <img
-              src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=200&h=160&fit=crop"
-              alt="Top Seller"
-              className="fs-img"
-            />
+            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=200&h=160&fit=crop" alt="Top Seller" className="fs-img" />
             <button className="arrow-btn"><ArrowUpRight size={16} /></button>
           </div>
 
-          {/* AI Picks */}
-          <div className="card ai-card">
-            <button className="arrow-btn"><ArrowUpRight size={16} /></button>
-            <img
-              src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=280&h=200&fit=crop"
-              alt="AI Picks"
-              className="ai-img"
-            />
+          <div className="card ai-card anim-fade-up" style={{ animationDelay: "0.3s" }}>
+            <button className="arrow-btn" style={{ position:"absolute", top:14, right:14 }}><ArrowUpRight size={16} /></button>
+            <img src="https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=280&h=200&fit=crop" alt="AI Picks" className="ai-img" />
             <div className="ai-text">
               <p className="ai-name">AI Picks — Laptop</p>
               <p className="ai-sub">Curated just for you</p>
@@ -114,8 +194,7 @@ export default function Homeone() {
       {/* ── Bottom Row ── */}
       <div className="bottom-row">
 
-        {/* More Products */}
-        <div className="card more-card">
+        <div className="card more-card anim-fade-up" style={{ animationDelay: "0.35s" }}>
           <div className="more-header">
             <div>
               <p className="more-title">More Products</p>
@@ -124,14 +203,13 @@ export default function Homeone() {
             <button className="heart-btn"><Heart size={16} fill="#e11d48" color="#e11d48" /></button>
           </div>
           <div className="more-imgs">
-            {products.map(p => (
-              <img key={p.id} src={p.img} alt={p.name} className="more-img" />
+            {products.map((p, i) => (
+              <img key={p.id} src={p.img} alt="product" className="more-img" style={{ animationDelay: `${0.4 + i * 0.1}s` }} />
             ))}
           </div>
         </div>
 
-        {/* Sellers Stats */}
-        <div className="card sellers-card">
+        <div className="card sellers-card anim-fade-up" style={{ animationDelay: "0.45s" }}>
           <div className="sellers-avatars">
             {["seed=buyer1","seed=seller1","seed=vendor2"].map((s, i) => (
               <img key={i} src={`https://api.dicebear.com/7.x/adventurer/svg?${s}`} alt="user" className="seller-avatar" />
@@ -147,8 +225,7 @@ export default function Homeone() {
           </div>
         </div>
 
-        {/* Popular Product */}
-        <div className="card popular-card">
+        <div className="card popular-card anim-fade-up" style={{ animationDelay: "0.5s" }}>
           <span className="popular-tag"><Sparkles size={12} /> Popular</span>
           <button className="arrow-btn top-right"><ArrowUpRight size={16} /></button>
           <p className="popular-title">AI Shopping<br />Has Arrived</p>
@@ -161,14 +238,9 @@ export default function Homeone() {
           </div>
         </div>
 
-        {/* Trending */}
-        <div className="card trending-card">
+        <div className="card trending-card anim-fade-up" style={{ animationDelay: "0.55s" }}>
           <button className="arrow-btn top-right"><ArrowUpRight size={16} /></button>
-          <img
-            src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=260&h=200&fit=crop"
-            alt="Trending"
-            className="trending-img"
-          />
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=260&h=200&fit=crop" alt="Trending" className="trending-img" />
           <div className="trending-text">
             <p className="trending-name">Trending Sneakers</p>
             <p className="trending-sub">Best deals this week</p>
