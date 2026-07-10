@@ -78,18 +78,22 @@ export default function Homethree() {
     return () => clearInterval(id);
   }, []);
 
-  /* Intersection observer — staggered card entrance */
+  /* Intersection observer — staggered card entrance, replays every time */
   useEffect(() => {
+    const timers = [];
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
+        const idx = Number(e.target.dataset.idx);
         if (e.isIntersecting) {
-          const idx = Number(e.target.dataset.idx);
-          setTimeout(() => setVisible(v => ({ ...v, [idx]: true })), idx * 120);
+          const t = setTimeout(() => setVisible(v => ({ ...v, [idx]: true })), idx * 120);
+          timers.push(t);
+        } else {
+          setVisible(v => ({ ...v, [idx]: false }));
         }
       });
     }, { threshold: 0.15 });
     cardRefs.current.forEach(r => r && obs.observe(r));
-    return () => obs.disconnect();
+    return () => { obs.disconnect(); timers.forEach(clearTimeout); };
   }, []);
 
   return (

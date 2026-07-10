@@ -25,16 +25,20 @@ export default function Homefour() {
 
   useEffect(() => {
     setVisible({});
+    const timers = [];
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
+        const i = Number(e.target.dataset.i);
         if (e.isIntersecting) {
-          const i = Number(e.target.dataset.i);
-          setTimeout(() => setVisible(v => ({ ...v, [e.target.dataset.key]: true })), i * 80);
+          const t = setTimeout(() => setVisible(v => ({ ...v, [e.target.dataset.key]: true })), i * 80);
+          timers.push(t);
+        } else {
+          setVisible(v => ({ ...v, [e.target.dataset.key]: false }));
         }
       });
     }, { threshold: 0.1 });
     refs.current.forEach(r => r && obs.observe(r));
-    return () => obs.disconnect();
+    return () => { obs.disconnect(); timers.forEach(clearTimeout); };
   }, [active]);
 
   return (

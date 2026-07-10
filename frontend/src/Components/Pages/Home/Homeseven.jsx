@@ -32,7 +32,7 @@ export default function Homeseven() {
 
         {!isLoggedIn ? (
           /* Locked state */
-          <div style={{ background: "#fff", borderRadius: 24, padding: "64px 40px", textAlign: "center", boxShadow: "0 2px 20px rgba(0,0,0,0.06)", position: "relative", overflow: "hidden" }}>
+          <div style={{ background: "#fff", borderRadius: 24,  textAlign: "center", boxShadow: "0 2px 20px rgba(0,0,0,0.06)", position: "relative", overflow: "hidden" }}>
             {/* Blurred preview */}
             <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, filter: "blur(6px)", opacity: 0.4, pointerEvents: "none", marginBottom: -120 }}>
               {mockProducts.map(p => (
