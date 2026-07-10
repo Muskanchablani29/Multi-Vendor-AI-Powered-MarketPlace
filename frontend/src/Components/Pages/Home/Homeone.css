@@ -61,8 +61,8 @@
 ══════════════════════════════ */
 .home-wrapper {
   background: #ffffff;
-  min-height: 100vh;
-  padding: 20px;
+  min-height: 80vh;
+  padding: 10px;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
