@@ -97,7 +97,7 @@ export default function Homethree() {
   }, []);
 
   return (
-    <section style={{ padding: "80px 40px", background: "#fff", position: "relative", overflow: "hidden" }}>
+    <section style={{ padding: "40px 40px", background: "#fff", position: "relative", overflow: "hidden" }}>
       <style>{`
         /* ── Keyframes ── */
         @keyframes bgShift {
