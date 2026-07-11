@@ -1,4 +1,5 @@
 import { ShoppingBag, Heart, RefreshCw, User } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -19,10 +20,10 @@ export default function Navbar() {
 
         {/* Nav Links */}
         <div className="navbar-links">
-          <a href="#" className="nav-link active">Home</a>
-          <a href="#about" className="nav-link">About</a>
-          <a href="#" className="nav-link">Products</a>
-          <a href="#" className="nav-link">Sellers</a>
+          <NavLink to="/"      className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Home</NavLink>
+          <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>About</NavLink>
+          <NavLink to="/products" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Products</NavLink>
+          <NavLink to="/sellers"  className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>Sellers</NavLink>
         </div>
 
         {/* Centered Search */}
