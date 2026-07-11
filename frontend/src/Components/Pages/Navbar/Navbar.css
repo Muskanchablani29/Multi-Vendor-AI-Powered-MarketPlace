@@ -40,6 +40,34 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* Nav Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #555;
+  padding: 7px 14px;
+  border-radius: 50px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-link:hover {
+  background: #fff;
+  color: #111;
+}
+
+.nav-link.active {
+  background: #111;
+  color: #fff;
+}
+
 /* Search pill - centered, takes most space */
 .navbar-center {
   flex: 1;

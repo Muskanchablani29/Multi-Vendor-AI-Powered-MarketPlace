@@ -17,6 +17,14 @@ export default function Navbar() {
           <span>NovaMart.</span>
         </div>
 
+        {/* Nav Links */}
+        <div className="navbar-links">
+          <a href="#" className="nav-link active">Home</a>
+          <a href="#about" className="nav-link">About</a>
+          <a href="#" className="nav-link">Products</a>
+          <a href="#" className="nav-link">Sellers</a>
+        </div>
+
         {/* Centered Search */}
         <div className="navbar-center">
           <div className="navbar-search">
