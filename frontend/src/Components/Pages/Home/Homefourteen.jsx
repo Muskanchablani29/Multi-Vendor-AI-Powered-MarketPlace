@@ -131,7 +131,7 @@ export default function Homefourteen() {
   }, []);
 
   return (
-    <section ref={sectionRef} style={{ padding: "90px 40px", background: "#fff" }}>
+    <section ref={sectionRef} style={{ padding: "40px 40px", background: "#fff" }}>
       <style>{css}</style>
 
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>

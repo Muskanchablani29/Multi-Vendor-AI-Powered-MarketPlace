@@ -105,7 +105,7 @@ function StepRow({ step, index }) {
 
 export default function Hometwelve() {
   return (
-    <section style={{ padding: "80px 20px", background: "#111", position: "relative" }}>
+    <section style={{ padding: "30px 20px", background: "#111", position: "relative" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
 
         {/* Header */}
