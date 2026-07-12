@@ -514,3 +514,143 @@
   border: 1px solid rgba(255,255,255,0.2);
 }
 .ab-cta-btn.secondary:hover { background: rgba(255,255,255,0.16); }
+
+/* ══════════════════════════════
+   WHY NOVAMART
+══════════════════════════════ */
+.wnm-section {
+  background: #f0f2f5;
+  padding: 80px 60px;
+}
+
+/* header fade in */
+.wnm-header-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.wnm-header-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+/* steps container */
+.wnm-steps {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+
+/* each step row */
+.wnm-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  padding: 20px 0;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+/* slide from left */
+.wnm-left  { transform: translateX(-60px); }
+/* slide from right */
+.wnm-right { transform: translateX(60px);  flex-direction: row-reverse; }
+
+.wnm-visible {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* step number */
+.wnm-step-num {
+  font-size: 52px;
+  font-weight: 900;
+  font-family: 'Playfair Display', Georgia, serif;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 80px;
+  text-align: center;
+  opacity: 0.25;
+  transition: opacity 0.4s;
+  padding-top: 8px;
+}
+.wnm-visible .wnm-step-num { opacity: 1; }
+
+/* card */
+.wnm-step-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.wnm-step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+}
+
+/* icon box */
+.wnm-step-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+/* body */
+.wnm-step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wnm-step-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  width: fit-content;
+  letter-spacing: 0.3px;
+}
+
+.wnm-step-body h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111;
+  line-height: 1.2;
+}
+
+.wnm-step-body p {
+  font-size: 13.5px;
+  color: #666;
+  line-height: 1.65;
+}
+
+/* vertical connector between steps */
+.wnm-connector {
+  position: absolute;
+  left: 39px;
+  bottom: -20px;
+  width: 2px;
+  height: 40px;
+  background: linear-gradient(to bottom, #ddd, transparent);
+}
+.wnm-right .wnm-connector {
+  left: auto;
+  right: 39px;
+}
