@@ -133,7 +133,7 @@ function SellerCard({ s, i }) {
 
 export default function Homefive() {
   return (
-    <section style={{ padding: "88px 40px", background: "#fafafa" }}>
+    <section style={{ padding: "20px 20px", background: "#fafafa" }}>
       <style>{`
         @keyframes fadeSlideUp {
           from { opacity: 0; transform: translateY(28px); }
